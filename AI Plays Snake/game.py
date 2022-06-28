@@ -1,4 +1,3 @@
-from tkinter import RIGHT
 import pygame
 import random
 from enum import Enum
@@ -6,8 +5,8 @@ from collections import namedtuple  # used to assign meaning to each element wit
 import numpy as np
 
 pygame.init() # initialise all pygame modules correctly
-font = pygame.font.Font('AI Plays Snake/arial.ttf', 25)  # taken from file
-# font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
+# font = pygame.font.Font('arial.ttf', 25)  # taken from file
+font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
 
 # changes to make it 'AI worthy'
 # 1. reset function
@@ -138,14 +137,14 @@ class snakeGameAI: # class is a user defined data structure
         clock_wise = [Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP]
         idx = clock_wise.index(self.direction)
 
-        if np.arrary_equal(action, [1,0,0]):
+        if np.array_equal(action, [1, 0, 0]):
             new_dir = clock_wise[idx]  # no change
-        elif np.arrary_equal(action, [0,1,0]):
+        elif np.array_equal(action, [0, 1, 0]):
             next_idx = (idx + 1) % 4
-            new_dir = clock_wise[idx]  # right turn r -> d -> l -> u
-        else:  # [0,0,1]
+            new_dir = clock_wise[next_idx]  # right turn r -> d -> l -> u
+        else:  # [0, 0, 1]
             next_idx = (idx - 1) % 4
-            new_dir = clock_wise[idx]  # left turn r -> u -> l -> d
+            new_dir = clock_wise[next_idx]  # left turn r -> u -> l -> d
 
         self.direction = new_dir
 
