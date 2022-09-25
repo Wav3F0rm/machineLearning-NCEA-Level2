@@ -41,10 +41,10 @@ class snakeGame: # class is a user defined data structure
         # init game state
         self.direction = Direction.RIGHT
 
-        self.head = Point(self.w/2, self.h/2)
+        self.head = Point(self.w/2, self.h/2)  # sets position for front of snake in space
         self.snake = [self.head,
                         Point(self.head.x-BLOCK_SIZE, self.head.y),
-                        Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]
+                        Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]  # creates list for each segment of snake body in space. 
 
         self.score = 0
         self.food = None

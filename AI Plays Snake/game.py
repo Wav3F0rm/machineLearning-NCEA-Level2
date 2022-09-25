@@ -5,7 +5,6 @@ from collections import namedtuple  # used to assign meaning to each element wit
 import numpy as np
 
 pygame.init() # initialise all pygame modules correctly
-# font = pygame.font.Font('arial.ttf', 25)  # taken from file
 font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
 
 # changes to make it 'AI worthy'

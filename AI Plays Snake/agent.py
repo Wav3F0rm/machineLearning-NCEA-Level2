@@ -17,11 +17,11 @@ class Agent:
         self.epsilon = 0  # controls randomness
         self.gamma = 0.9  # discount rate g<1
         self.memory = deque(maxlen=MAX_MEMORY)  # popleft() if memory is full
-        self.model = Linear_QNet(11, 256, 3)  # 11 state values, arbitrary number, 3 possible actions
+        self.model = Linear_QNet(11, 512, 3)  # 11 state values, arbitrary number, 3 possible actions
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     def get_state(self, game):
-        head = game.snake[0]
+        head = game.snake[0]  # creates a boundary of 20px around the head of the snake, this allows it to see if a collision is imminent 
         point_l = Point(head.x - 20, head.y)
         point_r = Point(head.x - 20, head.y)
         point_u = Point(head.x, head.y - 20)
@@ -32,7 +32,7 @@ class Agent:
         dir_u = game.direction == Direction.UP
         dir_d = game.direction == Direction.DOWN
 
-        # creates arrary with each possible danger state, this is passed to the model 
+        # creates arrary with each possible state, this is passed to the model 
         state = [
             # Danger straight
             (dir_r and game.is_collision(point_r)) or

@@ -19,4 +19,4 @@ def plot(scores, mean_scores):
     plt.pause(.1)
 
 def saveGraph():
-    plt.savefig('./Figures/Figure1.png')
+    plt.savefig('./Figures')

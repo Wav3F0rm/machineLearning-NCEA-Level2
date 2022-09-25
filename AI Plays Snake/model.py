@@ -7,13 +7,13 @@ import os
 class Linear_QNet(nn.Module):  # defines size and shape of neural net, input layer --> hidden layer, hidden layer --> output layer
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
-        self.liner1 = nn.Linear(input_size, hidden_size)
-        self.liner2 = nn.Linear(hidden_size, output_size)
+        self.linear1 = nn.Linear(input_size, hidden_size)
+        self.linear2 = nn.Linear(hidden_size, output_size)
 
 
     def forward(self, x):  # creates feed forward function
-        x = F.relu(self.liner1(x))  # relu is applied each element in a tensor. If n < 0 then: n = 0. If n >= 0 then: do nothing.
-        x = self.liner2(x)
+        x = F.relu(self.linear1(x))  # relu is applied each element in a tensor. If n < 0 then: n = 0. If n >= 0 then: do nothing.
+        x = self.linear2(x)
         return x
 
     def save(self, file_name='model.pth'):
