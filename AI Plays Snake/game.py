@@ -105,7 +105,7 @@ class snakeGameAI: # class is a user defined data structure
         # 5. find new unsafe coordinates
         snake = self.snake
         self.unsafeCoordinates = unsafe.inUnsafe(snake)
-        print(self.unsafeCoordinates)
+        # print(self.unsafeCoordinates)
 
         # 6. update ui and clock
         self._update_ui()
@@ -125,7 +125,7 @@ class snakeGameAI: # class is a user defined data structure
         if pt in self.snake[1:]:
             return True
         # check for hitting unsafe Coordinates
-        #if pt in self.unsafeCoordinates:
+        if pt in self.unsafeCoordinates:
             return True
 
         return False
