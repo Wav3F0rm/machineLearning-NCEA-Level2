@@ -23,10 +23,3 @@ def inUnsafe(snake):
         if checkpoints.count(i) > 1:
             unsafeCoordinates.append(i)
     return unsafeCoordinates
-
-
-''' def _graphUnsafe(snake, checkpoints, unsafeCoordinates):
-        display.clear_output(wait=True)
-        display.display(plt.gcf())
-        plt.clf()
-        plt.plot()'''
