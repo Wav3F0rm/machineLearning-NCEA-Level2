@@ -3,6 +3,7 @@ import random
 from enum import Enum
 from collections import namedtuple  # used to assign meaning to each element within a tuple, increasing readability
 import numpy as np
+import unsafe
 
 pygame.init() # initialise all pygame modules correctly
 font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
@@ -28,6 +29,7 @@ RED = (200,0,0)
 BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0,0,0)
+YELLOW = (255, 255, 0)
 
 BLOCK_SIZE = 20
 SPEED = 75
@@ -54,6 +56,9 @@ class snakeGameAI: # class is a user defined data structure
         self.snake = [self.head,
                         Point(self.head.x-BLOCK_SIZE, self.head.y),
                         Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]
+        
+        self.unsafeCoordinates = []
+        snake = []
 
         self.score = 0
         self.food = None
@@ -97,11 +102,16 @@ class snakeGameAI: # class is a user defined data structure
         else:
             self.snake.pop()  # removes last element from snake
 
-        # 5. update ui and clock
+        # 5. find new unsafe coordinates
+        snake = self.snake
+        self.unsafeCoordinates = unsafe.inUnsafe(snake)
+        print(self.unsafeCoordinates)
+
+        # 6. update ui and clock
         self._update_ui()
         self.clock.tick(SPEED)
 
-        # 6. return game over and score
+        # 7. return game over and score
         return reward, game_over, self.score
 
 
@@ -114,6 +124,9 @@ class snakeGameAI: # class is a user defined data structure
         # check for hitting itself 
         if pt in self.snake[1:]:
             return True
+        # check for hitting unsafe Coordinates
+        #if pt in self.unsafeCoordinates:
+            return True
 
         return False
 
@@ -125,6 +138,10 @@ class snakeGameAI: # class is a user defined data structure
             pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x+4, pt.y+4, 12, 12))
 
         pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE))  # draw food
+
+        for i in self.unsafeCoordinates:
+            if i not in self.snake:
+                pygame.draw.rect(self.display, YELLOW, pygame.Rect(i.x+5, i.y+5, 10, 10))
 
         text = font.render("Score: " + str(self.score), True, WHITE)
         self.display.blit(text, [0,0])
