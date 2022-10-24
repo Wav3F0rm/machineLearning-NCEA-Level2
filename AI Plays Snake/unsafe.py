@@ -1,12 +1,10 @@
-import game
 from collections import namedtuple
-import matplotlib.pyplot as plt
-from IPython import display
 
 Point = namedtuple('Point', 'x, y')
-plt.ion()
 
 BLOCK_SIZE = 20
+
+unsafeCoordinates = []
 
 def inUnsafe(snake):
     snake = snake
@@ -22,4 +20,3 @@ def inUnsafe(snake):
     for i in checkpoints:
         if checkpoints.count(i) > 1:
             unsafeCoordinates.append(i)
-    return unsafeCoordinates
