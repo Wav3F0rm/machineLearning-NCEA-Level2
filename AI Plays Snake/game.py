@@ -123,10 +123,14 @@ class snakeGameAI: # class is a user defined data structure
         # check for hitting itself 
         if pt in self.snake[1:]:
             return True
+        return False
+
+    def is_unsafe(self, pt=None):
+        if pt is None:
+            pt = self.head
         # check for hitting unsafe Coordinates
         if pt in self.unsafeCoordinates:
             return True
-
         return False
 
     def _update_ui(self):

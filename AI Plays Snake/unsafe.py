@@ -20,3 +20,5 @@ def inUnsafe(snake):
     for i in checkpoints:
         if checkpoints.count(i) > 1:
             unsafeCoordinates.append(i)
+    
+    return unsafeCoordinates

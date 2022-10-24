@@ -17,7 +17,7 @@ class Agent:
         self.epsilon = 0  # controls randomness
         self.gamma = 0.9  # discount rate g<1
         self.memory = deque(maxlen=MAX_MEMORY)  # popleft() if memory is full
-        self.model = Linear_QNet(11, 512, 3)  # 11 state values, arbitrary number, 3 possible actions
+        self.model = Linear_QNet(14, 512, 3)  # 11 state values, arbitrary number, 3 possible actions
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     def get_state(self, game):
@@ -51,6 +51,24 @@ class Agent:
             (dir_u and game.is_collision(point_l)) or
             (dir_r and game.is_collision(point_u)) or
             (dir_l and game.is_collision(point_d)),
+
+            # Unsafe straight
+            (dir_r and game.is_unsafe(point_r)) or
+            (dir_l and game.is_unsafe(point_l)) or
+            (dir_u and game.is_unsafe(point_u)) or
+            (dir_d and game.is_unsafe(point_d)),
+
+            # Unsafe right
+            (dir_u and game.is_unsafe(point_r)) or
+            (dir_d and game.is_unsafe(point_l)) or
+            (dir_l and game.is_unsafe(point_u)) or
+            (dir_r and game.is_unsafe(point_d)),
+
+            # Unsafe left
+            (dir_d and game.is_unsafe(point_r)) or
+            (dir_u and game.is_unsafe(point_l)) or
+            (dir_r and game.is_unsafe(point_u)) or
+            (dir_l and game.is_unsafe(point_d)),
 
             # Move direction
             dir_l,
