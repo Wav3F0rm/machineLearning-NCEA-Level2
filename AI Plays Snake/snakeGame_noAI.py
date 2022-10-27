@@ -5,8 +5,7 @@ from enum import Enum
 from collections import namedtuple  # used to assign meaning to each element within a tuple, increasing readability
 
 pygame.init() # initialise all pygame modules correctly
-font = pygame.font.Font('AI Plays Snake/arial.ttf', 25)  # taken from file
-# font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
+font = pygame.font.SysFont('arial', 25)  # taken from system file, runs much slower
 
 class Direction(Enum):  # uppercase used for const
     RIGHT = 1
@@ -24,7 +23,7 @@ BLUE2 = (0, 100, 255)
 BLACK = (0,0,0)
 
 BLOCK_SIZE = 20
-SPEED = 15
+SPEED = 20
 
 # Object Oriented Programming, or OOP is a programming methodology where objects are defined with properties and values, 
 # over the traditional logic and functional approach of procedural programming
